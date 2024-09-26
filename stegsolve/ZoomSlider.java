@@ -12,8 +12,10 @@ public class ZoomSlider extends JPanel {
     private JSlider slider;
     private JTextField textBox;
     private int value;
-    
-    public int getValue () { return value; }
+
+    public int getValue() {
+        return value;
+    }
 
     void setValue(int value) {
         slider.setValue(value);
@@ -43,7 +45,7 @@ public class ZoomSlider extends JPanel {
         textBox.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     setValue(Integer.parseInt(textBox.getText()));
                 }
             }

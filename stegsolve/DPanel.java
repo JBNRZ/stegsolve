@@ -15,10 +15,10 @@ import java.util.TooManyListenersException;
 
 /**
  * A JPanel with an image attached to it
+ *
  * @author Caesum
  */
-public class DPanel extends JPanel
-{
+public class DPanel extends JPanel {
     private Dimension preferredSize = new Dimension(200, 200);
     private Dimension defaultSize = new Dimension();
     private Dimension currentSize = new Dimension();
@@ -41,22 +41,23 @@ public class DPanel extends JPanel
     /**
      * Overridden paint method for the panel which
      * paints the image on the panel
+     *
      * @param g graphics object
      */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(bi!=null)
+        if (bi != null)
             g.drawImage(bi, 0, 0, currentSize.width, currentSize.height, this);
     }
 
     /**
      * Sets the image for the panel, and calls
      * repaint
+     *
      * @param bix Image to show on the panel
      */
-    public void setImage(BufferedImage bix)
-    {
+    public void setImage(BufferedImage bix) {
         bi = bix;
         defaultSize.width = bi.getWidth();
         defaultSize.height = bi.getHeight();
@@ -71,8 +72,8 @@ public class DPanel extends JPanel
     }
 
     public void apply(int percent) {
-        currentSize.width = (int)(defaultSize.width * (((float)percent)/100));
-        currentSize.height = (int)(defaultSize.height * (((float)percent)/100));
+        currentSize.width = (int) (defaultSize.width * (((float) percent) / 100));
+        currentSize.height = (int) (defaultSize.height * (((float) percent) / 100));
         preferredSize = currentSize;
         revalidate();
         repaint();
@@ -124,7 +125,7 @@ public class DPanel extends JPanel
                     java.util.List transferData = (java.util.List) transferable.getTransferData(DataFlavor.javaFileListFlavor);
 
                     if (transferData.size() == 1) {
-                        StegSolve.that.loadImage((File)transferData.get(0));
+                        StegSolve.that.loadImage((File) transferData.get(0));
                         dtde.dropComplete(true);
                     }
 

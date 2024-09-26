@@ -14,10 +14,10 @@ import javax.imageio.*;
 
 /**
  * Image combiner
+ *
  * @author Caesum
  */
-public class Combiner extends JFrame
-{
+public class Combiner extends JFrame {
     /**
      * Label showing the current offset
      */
@@ -58,18 +58,18 @@ public class Combiner extends JFrame
     /**
      * The current combination being tried
      */
-    private int inum=0;
+    private int inum = 0;
     /**
      * current width/height
      */
-    private int w=0, h=0;
+    private int w = 0, h = 0;
 
     /**
      * Creates new form Combiner
+     *
      * @param b The image to solve
      */
-    public Combiner(BufferedImage b, BufferedImage b2)
-    {
+    public Combiner(BufferedImage b, BufferedImage b2) {
         bi = b;
         bi2 = b2;
         initComponents();
@@ -113,9 +113,9 @@ public class Combiner extends JFrame
 
         add(buttonPanel, BorderLayout.SOUTH);
 
-        backwardButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "back");
+        backwardButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "back");
         backwardButton.getActionMap().put("back", backButtonPress);
-        forwardButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "forward");
+        forwardButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "forward");
         forwardButton.getActionMap().put("forward", forwardButtonPress);
 
         dp = new DPanel();
@@ -129,18 +129,19 @@ public class Combiner extends JFrame
     /**
      * This is used to map the left arrow key to the back button
      */
-    private Action backButtonPress = new AbstractAction()
-    {
-        public void actionPerformed(ActionEvent e)
-        { backwardButtonActionPerformed(e);}
+    private Action backButtonPress = new AbstractAction() {
+        public void actionPerformed(ActionEvent e) {
+            backwardButtonActionPerformed(e);
+        }
     };
 
     /**
      * Move back by one offset
+     *
      * @param evt Event
      */
     private void backwardButtonActionPerformed(ActionEvent evt) {
-        if(transform == null) return;
+        if (transform == null) return;
         transform.back();
         updateImage();
     }
@@ -148,51 +149,48 @@ public class Combiner extends JFrame
     /**
      * This is used to map the right arrow key to the forward button
      */
-    private Action forwardButtonPress = new AbstractAction()
-    {
-        public void actionPerformed(ActionEvent e)
-        { forwardButtonActionPerformed(e);}
+    private Action forwardButtonPress = new AbstractAction() {
+        public void actionPerformed(ActionEvent e) {
+            forwardButtonActionPerformed(e);
+        }
     };
 
     /**
      * Move forward by one offset
+     *
      * @param evt Event
      */
     private void forwardButtonActionPerformed(ActionEvent evt) {
-        if(bi == null) return;
+        if (bi == null) return;
         transform.forward();
         updateImage();
     }
 
     /**
      * Save the current image
+     *
      * @param evt Event
      */
-    private void saveButtonActionPerformed(ActionEvent evt)
-    {
+    private void saveButtonActionPerformed(ActionEvent evt) {
         File sfile = null;
         JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-           "Images", "jpg", "gif", "png", "bmp");
+                "Images", "jpg", "gif", "png", "bmp");
         fileChooser.setFileFilter(filter);
         fileChooser.setSelectedFile(new File("solved.bmp"));
         int rVal = fileChooser.showSaveDialog(this);
         System.setProperty("user.dir", fileChooser.getCurrentDirectory().getAbsolutePath());
-        if(rVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (rVal == JFileChooser.APPROVE_OPTION) {
             sfile = fileChooser.getSelectedFile();
-            try
-            {
+            try {
                 BufferedImage bbx = transform.getImage();
-                int rns = sfile.getName().lastIndexOf(".")+1;
-                if(rns==0)
-                   ImageIO.write(bbx, "bmp", sfile);
+                int rns = sfile.getName().lastIndexOf(".") + 1;
+                if (rns == 0)
+                    ImageIO.write(bbx, "bmp", sfile);
                 else
-                   ImageIO.write(bbx, sfile.getName().substring(rns), sfile);
-            }
-            catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(this, "Failed to write file: "+e.toString());
+                    ImageIO.write(bbx, sfile.getName().substring(rns), sfile);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Failed to write file: " + e.toString());
             }
         }
     }
@@ -200,9 +198,8 @@ public class Combiner extends JFrame
     /**
      * Update the text description and repaint the image
      */
-    private void updateImage()
-    {
-        if(transform.getImage().getWidth()!=w || transform.getImage().getHeight()!=h)
+    private void updateImage() {
+        if (transform.getImage().getWidth() != w || transform.getImage().getHeight() != h)
             newImage();
         nowShowing.setText(transform.getText());
         dp.setImage(transform.getImage());
@@ -212,14 +209,13 @@ public class Combiner extends JFrame
     /**
      * Show the image and make sure the form looks right
      */
-    private void newImage()
-    {
+    private void newImage() {
         nowShowing.setText(transform.getText());
         dp.setImage(transform.getImage());
         w = transform.getImage().getWidth();
         h = transform.getImage().getHeight();
-        dp.setSize(transform.getImage().getWidth(),transform.getImage().getHeight());
-        dp.setPreferredSize(new Dimension(transform.getImage().getWidth(),transform.getImage().getHeight()));
+        dp.setSize(transform.getImage().getWidth(), transform.getImage().getHeight());
+        dp.setPreferredSize(new Dimension(transform.getImage().getWidth(), transform.getImage().getHeight()));
         this.setMaximumSize(getToolkit().getScreenSize());
         pack();
         scrollPane.revalidate();

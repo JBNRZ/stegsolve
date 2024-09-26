@@ -14,6 +14,7 @@ import java.io.*;
 
 /**
  * The data extraction form
+ *
  * @author Caesum
  */
 public class Extract extends javax.swing.JFrame {
@@ -24,7 +25,7 @@ public class Extract extends javax.swing.JFrame {
     /**
      * The bytes being extracted
      */
-    private byte [] extract = null;
+    private byte[] extract = null;
     /**
      * A mask of the bits selected for extraction
      */
@@ -49,11 +50,11 @@ public class Extract extends javax.swing.JFrame {
     /**
      * Bit position in the current extract byte
      */
-    private int extractBitPos=0;
+    private int extractBitPos = 0;
     /**
      * Byte position in the current extract
      */
-    private int extractBytePos=0;
+    private int extractBytePos = 0;
     /**
      * Text that goes into the preview box
      */
@@ -69,192 +70,278 @@ public class Extract extends javax.swing.JFrame {
 
     // TODO - inversion option
     // TODO - optional offset to start
-    
-    /** 
+
+    /**
      * Creates new form Extract
      */
     public Extract(BufferedImage b) {
-        bi = b; 
+        bi = b;
         initComponents();
     }
 
     /**
      * Retrieves the mask from the bits selected on the form
      */
-    private void getMask()
-    {
+    private void getMask() {
         mask = 0;
         maskbits = 0;
-        if(ab7.isSelected()) { mask += 1<<31; maskbits++;}
-        if(ab6.isSelected()) { mask += 1<<30; maskbits++;}
-        if(ab5.isSelected()) { mask += 1<<29; maskbits++;}
-        if(ab4.isSelected()) { mask += 1<<28; maskbits++;}
-        if(ab3.isSelected()) { mask += 1<<27; maskbits++;}
-        if(ab2.isSelected()) { mask += 1<<26; maskbits++;}
-        if(ab1.isSelected()) { mask += 1<<25; maskbits++;}
-        if(ab0.isSelected()) { mask += 1<<24; maskbits++;}
-        if(rb7.isSelected()) { mask += 1<<23; maskbits++;}
-        if(rb6.isSelected()) { mask += 1<<22; maskbits++;}
-        if(rb5.isSelected()) { mask += 1<<21; maskbits++;}
-        if(rb4.isSelected()) { mask += 1<<20; maskbits++;}
-        if(rb3.isSelected()) { mask += 1<<19; maskbits++;}
-        if(rb2.isSelected()) { mask += 1<<18; maskbits++;}
-        if(rb1.isSelected()) { mask += 1<<17; maskbits++;}
-        if(rb0.isSelected()) { mask += 1<<16; maskbits++;}
-        if(gb7.isSelected()) { mask += 1<<15; maskbits++;}
-        if(gb6.isSelected()) { mask += 1<<14; maskbits++;}
-        if(gb5.isSelected()) { mask += 1<<13; maskbits++;}
-        if(gb4.isSelected()) { mask += 1<<12; maskbits++;}
-        if(gb3.isSelected()) { mask += 1<<11; maskbits++;}
-        if(gb2.isSelected()) { mask += 1<<10; maskbits++;}
-        if(gb1.isSelected()) { mask += 1<<9; maskbits++;}
-        if(gb0.isSelected()) { mask += 1<<8; maskbits++;}
-        if(bb7.isSelected()) { mask += 1<<7; maskbits++;}
-        if(bb6.isSelected()) { mask += 1<<6; maskbits++;}
-        if(bb5.isSelected()) { mask += 1<<5; maskbits++;}
-        if(bb4.isSelected()) { mask += 1<<4; maskbits++;}
-        if(bb3.isSelected()) { mask += 1<<3; maskbits++;}
-        if(bb2.isSelected()) { mask += 1<<2; maskbits++;}
-        if(bb1.isSelected()) { mask += 1<<1; maskbits++;}
-        if(bb0.isSelected()) { mask += 1; maskbits++;}
+        if (ab7.isSelected()) {
+            mask += 1 << 31;
+            maskbits++;
+        }
+        if (ab6.isSelected()) {
+            mask += 1 << 30;
+            maskbits++;
+        }
+        if (ab5.isSelected()) {
+            mask += 1 << 29;
+            maskbits++;
+        }
+        if (ab4.isSelected()) {
+            mask += 1 << 28;
+            maskbits++;
+        }
+        if (ab3.isSelected()) {
+            mask += 1 << 27;
+            maskbits++;
+        }
+        if (ab2.isSelected()) {
+            mask += 1 << 26;
+            maskbits++;
+        }
+        if (ab1.isSelected()) {
+            mask += 1 << 25;
+            maskbits++;
+        }
+        if (ab0.isSelected()) {
+            mask += 1 << 24;
+            maskbits++;
+        }
+        if (rb7.isSelected()) {
+            mask += 1 << 23;
+            maskbits++;
+        }
+        if (rb6.isSelected()) {
+            mask += 1 << 22;
+            maskbits++;
+        }
+        if (rb5.isSelected()) {
+            mask += 1 << 21;
+            maskbits++;
+        }
+        if (rb4.isSelected()) {
+            mask += 1 << 20;
+            maskbits++;
+        }
+        if (rb3.isSelected()) {
+            mask += 1 << 19;
+            maskbits++;
+        }
+        if (rb2.isSelected()) {
+            mask += 1 << 18;
+            maskbits++;
+        }
+        if (rb1.isSelected()) {
+            mask += 1 << 17;
+            maskbits++;
+        }
+        if (rb0.isSelected()) {
+            mask += 1 << 16;
+            maskbits++;
+        }
+        if (gb7.isSelected()) {
+            mask += 1 << 15;
+            maskbits++;
+        }
+        if (gb6.isSelected()) {
+            mask += 1 << 14;
+            maskbits++;
+        }
+        if (gb5.isSelected()) {
+            mask += 1 << 13;
+            maskbits++;
+        }
+        if (gb4.isSelected()) {
+            mask += 1 << 12;
+            maskbits++;
+        }
+        if (gb3.isSelected()) {
+            mask += 1 << 11;
+            maskbits++;
+        }
+        if (gb2.isSelected()) {
+            mask += 1 << 10;
+            maskbits++;
+        }
+        if (gb1.isSelected()) {
+            mask += 1 << 9;
+            maskbits++;
+        }
+        if (gb0.isSelected()) {
+            mask += 1 << 8;
+            maskbits++;
+        }
+        if (bb7.isSelected()) {
+            mask += 1 << 7;
+            maskbits++;
+        }
+        if (bb6.isSelected()) {
+            mask += 1 << 6;
+            maskbits++;
+        }
+        if (bb5.isSelected()) {
+            mask += 1 << 5;
+            maskbits++;
+        }
+        if (bb4.isSelected()) {
+            mask += 1 << 4;
+            maskbits++;
+        }
+        if (bb3.isSelected()) {
+            mask += 1 << 3;
+            maskbits++;
+        }
+        if (bb2.isSelected()) {
+            mask += 1 << 2;
+            maskbits++;
+        }
+        if (bb1.isSelected()) {
+            mask += 1 << 1;
+            maskbits++;
+        }
+        if (bb0.isSelected()) {
+            mask += 1;
+            maskbits++;
+        }
     }
 
     /**
      * Retrieve the ordering options from the form
      */
-    private void getBitOrderOptions()
-    {
-        if(byRowButton.isSelected()) rowFirst = true;
+    private void getBitOrderOptions() {
+        if (byRowButton.isSelected()) rowFirst = true;
         else rowFirst = false;
-        if(LSBButton.isSelected()) lsbFirst = true;
+        if (LSBButton.isSelected()) lsbFirst = true;
         else lsbFirst = false;
-        if(RGBButton.isSelected()) rgbOrder = 1;
+        if (RGBButton.isSelected()) rgbOrder = 1;
         else if (RBGButton.isSelected()) rgbOrder = 2;
         else if (GRBButton.isSelected()) rgbOrder = 3;
         else if (GBRButton.isSelected()) rgbOrder = 4;
         else if (BRGButton.isSelected()) rgbOrder = 5;
         else rgbOrder = 6;
     }
-    
+
     /**
      * Adds another bit to the extract
+     *
      * @param num Non-zero if adding a 1-bit
      */
-    private void addBit(int num)
-    {
-        if(num!=0)
-        {
-           extract[extractBytePos]+=extractBitPos;
+    private void addBit(int num) {
+        if (num != 0) {
+            extract[extractBytePos] += extractBitPos;
         }
-        extractBitPos>>=1;
-        if(extractBitPos>=1)
+        extractBitPos >>= 1;
+        if (extractBitPos >= 1)
             return;
-        extractBitPos=128;
+        extractBitPos = 128;
         extractBytePos++;
-        if(extractBytePos<extract.length)
-            extract[extractBytePos]=0;
+        if (extractBytePos < extract.length)
+            extract[extractBytePos] = 0;
     }
 
     /**
      * Examine 8 bits and check them against the mask to
      * see if any should be extracted
+     *
      * @param nextByte The byte to be examined
-     * @param bitMask The bitmask to be applied
+     * @param bitMask  The bitmask to be applied
      */
-    private void extract8Bits(int nextByte, int bitMask)
-    {
-        for(int i=0;i<8;i++)
-        {
-            if((mask&bitMask)!=0)
-            {
+    private void extract8Bits(int nextByte, int bitMask) {
+        for (int i = 0; i < 8; i++) {
+            if ((mask & bitMask) != 0) {
                 //System.out.println("call "+ mask+" "+bitMask+" "+nextByte);
                 addBit(nextByte & bitMask);
             }
-            if(lsbFirst)
-               bitMask<<=1;
+            if (lsbFirst)
+                bitMask <<= 1;
             else
-               bitMask>>>=1;
+                bitMask >>>= 1;
         }
     }
 
     /**
      * Extract bits from the given byte taking account of
      * the options selected
+     *
      * @param nextByte the byte to extract bits from
      */
-    private void extractBits(int nextByte)
-    {
-        if(lsbFirst)
-        {
-            extract8Bits(nextByte,1<<24);
-            switch(rgbOrder)
-            {
+    private void extractBits(int nextByte) {
+        if (lsbFirst) {
+            extract8Bits(nextByte, 1 << 24);
+            switch (rgbOrder) {
                 case 1: //rgb
-                    extract8Bits(nextByte,1<<16);
-                    extract8Bits(nextByte,1<<8);
-                    extract8Bits(nextByte,1);
+                    extract8Bits(nextByte, 1 << 16);
+                    extract8Bits(nextByte, 1 << 8);
+                    extract8Bits(nextByte, 1);
                     break;
                 case 2: //rbg
-                    extract8Bits(nextByte,1<<16);
-                    extract8Bits(nextByte,1);
-                    extract8Bits(nextByte,1<<8);
+                    extract8Bits(nextByte, 1 << 16);
+                    extract8Bits(nextByte, 1);
+                    extract8Bits(nextByte, 1 << 8);
                     break;
                 case 3: //grb
-                    extract8Bits(nextByte,1<<8);
-                    extract8Bits(nextByte,1<<16);
-                    extract8Bits(nextByte,1);
+                    extract8Bits(nextByte, 1 << 8);
+                    extract8Bits(nextByte, 1 << 16);
+                    extract8Bits(nextByte, 1);
                     break;
                 case 4: //gbr
-                    extract8Bits(nextByte,1<<8);
-                    extract8Bits(nextByte,1);
-                    extract8Bits(nextByte,1<<16);
+                    extract8Bits(nextByte, 1 << 8);
+                    extract8Bits(nextByte, 1);
+                    extract8Bits(nextByte, 1 << 16);
                     break;
                 case 5: //brg
-                    extract8Bits(nextByte,1);
-                    extract8Bits(nextByte,1<<16);
-                    extract8Bits(nextByte,1<<8);
+                    extract8Bits(nextByte, 1);
+                    extract8Bits(nextByte, 1 << 16);
+                    extract8Bits(nextByte, 1 << 8);
                     break;
                 case 6: //bgr
-                    extract8Bits(nextByte,1);
-                    extract8Bits(nextByte,1<<8);
-                    extract8Bits(nextByte,1<<16);
+                    extract8Bits(nextByte, 1);
+                    extract8Bits(nextByte, 1 << 8);
+                    extract8Bits(nextByte, 1 << 16);
                     break;
             }
-        }
-        else
-        {
-            extract8Bits(nextByte,1<<31);
-            switch(rgbOrder)
-            {
+        } else {
+            extract8Bits(nextByte, 1 << 31);
+            switch (rgbOrder) {
                 case 1: //rgb
-                    extract8Bits(nextByte,1<<23);
-                    extract8Bits(nextByte,1<<15);
-                    extract8Bits(nextByte,1<<7);
+                    extract8Bits(nextByte, 1 << 23);
+                    extract8Bits(nextByte, 1 << 15);
+                    extract8Bits(nextByte, 1 << 7);
                     break;
                 case 2: //rbg
-                    extract8Bits(nextByte,1<<23);
-                    extract8Bits(nextByte,1<<7);
-                    extract8Bits(nextByte,1<<15);
+                    extract8Bits(nextByte, 1 << 23);
+                    extract8Bits(nextByte, 1 << 7);
+                    extract8Bits(nextByte, 1 << 15);
                     break;
                 case 3: //grb
-                    extract8Bits(nextByte,1<<15);
-                    extract8Bits(nextByte,1<<23);
-                    extract8Bits(nextByte,1<<7);
+                    extract8Bits(nextByte, 1 << 15);
+                    extract8Bits(nextByte, 1 << 23);
+                    extract8Bits(nextByte, 1 << 7);
                     break;
                 case 4: //gbr
-                    extract8Bits(nextByte,1<<15);
-                    extract8Bits(nextByte,1<<7);
-                    extract8Bits(nextByte,1<<23);
+                    extract8Bits(nextByte, 1 << 15);
+                    extract8Bits(nextByte, 1 << 7);
+                    extract8Bits(nextByte, 1 << 23);
                     break;
                 case 5: //brg
-                    extract8Bits(nextByte,1<<7);
-                    extract8Bits(nextByte,1<<23);
-                    extract8Bits(nextByte,1<<15);
+                    extract8Bits(nextByte, 1 << 7);
+                    extract8Bits(nextByte, 1 << 23);
+                    extract8Bits(nextByte, 1 << 15);
                     break;
                 case 6: //bgr
-                    extract8Bits(nextByte,1<<7);
-                    extract8Bits(nextByte,1<<15);
-                    extract8Bits(nextByte,1<<23);
+                    extract8Bits(nextByte, 1 << 7);
+                    extract8Bits(nextByte, 1 << 15);
+                    extract8Bits(nextByte, 1 << 23);
                     break;
             }
         }
@@ -263,31 +350,26 @@ public class Extract extends javax.swing.JFrame {
     /**
      * Generates the extract from the selected options
      */
-    private void generateExtract()
-    {
+    private void generateExtract() {
         getMask();
         getBitOrderOptions();
         int len = bi.getHeight() * bi.getWidth();
         len = len * maskbits; // number of bits to be extracted
-        len = (len +7)/8; // bytes to be extracted
+        len = (len + 7) / 8; // bytes to be extracted
         extract = new byte[len];
         extractBitPos = 128;
         extractBytePos = 0;
         //System.out.println(bi.getHeight()+" "+bi.getWidth()+" "+len+" "+mask);
-        if(rowFirst)
-        {
-           for(int j=0;j<bi.getHeight();j++)
-              for(int i=0;i<bi.getWidth();i++)
-              {
-                  //System.out.println(i+" "+j+" "+extractBytePos);
-                  extractBits(bi.getRGB(i, j));
-              }
-        }
-        else
-        {
-           for(int i=0;i<bi.getWidth();i++)
-              for(int j=0;j<bi.getHeight();j++)
-                 extractBits(bi.getRGB(i, j));
+        if (rowFirst) {
+            for (int j = 0; j < bi.getHeight(); j++)
+                for (int i = 0; i < bi.getWidth(); i++) {
+                    //System.out.println(i+" "+j+" "+extractBytePos);
+                    extractBits(bi.getRGB(i, j));
+                }
+        } else {
+            for (int i = 0; i < bi.getWidth(); i++)
+                for (int j = 0; j < bi.getHeight(); j++)
+                    extractBits(bi.getRGB(i, j));
         }
     }
 
@@ -295,30 +377,25 @@ public class Extract extends javax.swing.JFrame {
      * Generates the preview from the selected options
      * and given the extract has already been generated
      */
-    private void generatePreview()
-    {
+    private void generatePreview() {
         boolean hexDump = hdInclude.isSelected();
         prev = new StringBuilder();
-        for(int i=0;i<extract.length;i+=16)
-        {
-            if(hexDump)
-            {
-              for(int j=0;j<16&&i+j<extract.length;j++)
-              {
-                prev.append(m2(Integer.toHexString(((int)extract[i+j])&0xff)));
-                if(j==7)
-                  prev.append(' ');
-              }
-              prev.append("  ");
+        for (int i = 0; i < extract.length; i += 16) {
+            if (hexDump) {
+                for (int j = 0; j < 16 && i + j < extract.length; j++) {
+                    prev.append(m2(Integer.toHexString(((int) extract[i + j]) & 0xff)));
+                    if (j == 7)
+                        prev.append(' ');
+                }
+                prev.append("  ");
             }
-            for(int j=0;j<16&&i+j<extract.length;j++)
-            {
-               char c = (char)extract[i+j];
-               if(c>=32 && c<=128)
-                   prev.append(c);
-               else
-                   prev.append('.');
-               if(j==7) prev.append(' ');
+            for (int j = 0; j < 16 && i + j < extract.length; j++) {
+                char c = (char) extract[i + j];
+                if (c >= 32 && c <= 128)
+                    prev.append(c);
+                else
+                    prev.append('.');
+                if (j == 7) prev.append(' ');
             }
             prev.append(ls);
         }
@@ -334,18 +411,14 @@ public class Extract extends javax.swing.JFrame {
         int rVal = fileChooser.showSaveDialog(this);
         System.setProperty("user.dir", fileChooser.getCurrentDirectory().getAbsolutePath());
         File sfile = null;
-        if(rVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (rVal == JFileChooser.APPROVE_OPTION) {
             sfile = fileChooser.getSelectedFile();
-            try
-            {
+            try {
                 FileWriter fw = new FileWriter(sfile);
                 fw.write(jPreview.getText());
                 fw.close();
-            }
-            catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(this, "Failed to write file: "+e.toString());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Failed to write file: " + e.toString());
             }
         }
     }
@@ -359,35 +432,32 @@ public class Extract extends javax.swing.JFrame {
         int rVal = fileChooser.showSaveDialog(this);
         System.setProperty("user.dir", fileChooser.getCurrentDirectory().getAbsolutePath());
         File sfile = null;
-        if(rVal == JFileChooser.APPROVE_OPTION)
-        {
+        if (rVal == JFileChooser.APPROVE_OPTION) {
             sfile = fileChooser.getSelectedFile();
-            try
-            {
+            try {
                 FileOutputStream fw = new FileOutputStream(sfile);
                 fw.write(extract);
                 fw.close();
-            }
-            catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(this, "Failed to write file: "+e.toString());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Failed to write file: " + e.toString());
             }
         }
     }
 
     /**
      * Ensures a hex string is 2 bytes long, adding a leading zero if it is not
+     *
      * @param hx hex string
      * @return
      */
-    private String m2(String hx)
-    {
-        if(hx.length()<2)
+    private String m2(String hx) {
+        if (hx.length() < 2)
             return "0" + hx;
         return hx;
     }
 
-    /** This method is called from within the constructor to
+    /**
+     * This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
@@ -495,7 +565,7 @@ public class Extract extends javax.swing.JFrame {
         bitPlanesPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth, 200));
 
         alphaBitPanel.setName("alphaBitPanel"); // NOI18N
-        alphaBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth-10, 34));
+        alphaBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth - 10, 34));
 
         alphaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         alphaLabel.setText("Alpha");
@@ -537,7 +607,7 @@ public class Extract extends javax.swing.JFrame {
         bitPlanesPanel.add(alphaBitPanel);
         alphaBitPanel.getAccessibleContext().setAccessibleName("alphaBitPanel");
 
-        redBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth-10, 34));
+        redBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth - 10, 34));
 
         redLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         redLabel.setText("Red");
@@ -578,7 +648,7 @@ public class Extract extends javax.swing.JFrame {
 
         bitPlanesPanel.add(redBitPanel);
 
-        greenBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth-10, 34));
+        greenBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth - 10, 34));
 
         greenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         greenLabel.setText("Green");
@@ -619,7 +689,7 @@ public class Extract extends javax.swing.JFrame {
 
         bitPlanesPanel.add(greenBitPanel);
 
-        blueBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth-10, 34));
+        blueBitPanel.setPreferredSize(new java.awt.Dimension(bitPlanesWidth - 10, 34));
 
         blueLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         blueLabel.setText("Blue");
@@ -742,46 +812,46 @@ public class Extract extends javax.swing.JFrame {
         javax.swing.GroupLayout bitPlaneOrderPanelLayout = new javax.swing.GroupLayout(bitPlaneOrderPanel);
         bitPlaneOrderPanel.setLayout(bitPlaneOrderPanelLayout);
         bitPlaneOrderPanelLayout.setHorizontalGroup(
-            bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bitPlaneOrderLabel)
-                    .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                                .addComponent(RBGButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(BRGButton))
-                            .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                                .addComponent(RGBButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(GRBButton))
-                            .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                                .addComponent(GBRButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(BGRButton)))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bitPlaneOrderLabel)
+                                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                                                .addComponent(RBGButton)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(BRGButton))
+                                                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                                                .addComponent(RGBButton)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(GRBButton))
+                                                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                                                .addComponent(GBRButton)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(BGRButton)))))
+                                .addContainerGap(72, Short.MAX_VALUE))
         );
         bitPlaneOrderPanelLayout.setVerticalGroup(
-            bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bitPlaneOrderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RGBButton)
-                    .addComponent(GRBButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RBGButton)
-                    .addComponent(BRGButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(GBRButton)
-                    .addComponent(BGRButton))
-                .addContainerGap(13, Short.MAX_VALUE))
+                bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bitPlaneOrderPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(bitPlaneOrderLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(RGBButton)
+                                        .addComponent(GRBButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(RBGButton)
+                                        .addComponent(BRGButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(bitPlaneOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(GBRButton)
+                                        .addComponent(BGRButton))
+                                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         orderSettingsPanel.add(bitPlaneOrderPanel);
@@ -869,6 +939,7 @@ public class Extract extends javax.swing.JFrame {
 
     /**
      * Generate the extract and generate the preview
+     *
      * @param evt Event
      */
     private void previewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previewButtonActionPerformed
@@ -878,6 +949,7 @@ public class Extract extends javax.swing.JFrame {
 
     /**
      * Generate the extract and the preview, and save it as text
+     *
      * @param evt Event
      */
     private void saveTextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTextButtonActionPerformed
@@ -888,6 +960,7 @@ public class Extract extends javax.swing.JFrame {
 
     /**
      * Generate the extract and save it as binary
+     *
      * @param evt Event
      */
     private void saveBinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBinButtonActionPerformed
@@ -897,6 +970,7 @@ public class Extract extends javax.swing.JFrame {
 
     /**
      * Close the form
+     *
      * @param evt Event
      */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
