@@ -263,7 +263,7 @@ public class StegSolve extends JFrame {
         forwardButton.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "forward");
         forwardButton.getActionMap().put("forward", forwardButtonPress);
 
-        this.setTitle("StegSolve 1.4 by Caesum (Mod by Giotino)");
+        this.setTitle("StegSolve 1.5 (Fixed)");
         this.setMaximumSize(getToolkit().getScreenSize());
 
         pack();
