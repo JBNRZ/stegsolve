@@ -1,7 +1,10 @@
 # StegSolve
 
-A modifed version of stegsolve
+A modified version of stegsolve
 
+## 1.5 changes
+
+- Fixed bug with `Stereogram Solver` `Frame Browser` `Image Combiner` not working
 
 ## 1.4 changes
 
